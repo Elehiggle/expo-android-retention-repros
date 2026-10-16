@@ -1,0 +1,8 @@
+{
+  "upstream_commit": "aaf153746ff4eba1f8399eff9b08e804114bf1c2",
+  "npm_version": "58.0.9",
+  "manager_before_sha256": "aea45b799b67f02af0aa917873dc0e5d647d3bae793eae9be21841a417edbaec",
+  "manager_after_sha256": "e95953e3a6dba275eb167519796df78bde99e7d19d55e9ef91c95dad1b44e9c7",
+  "status": "Native before failure and after five-check pass on Android API 37, 2026-10-16; see RESULTS.md",
+  "no_github_workflows": true
+}

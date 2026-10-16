@@ -1,0 +1,32 @@
+{
+  "package": "expo-modules-core",
+  "version": "58.0.19",
+  "upstreamCommit": "aaf153746ff4eba1f8399eff9b08e804114bf1c2",
+  "packagePath": "android/src/main/cpp/fabric",
+  "files": {
+    "ExpoComponentDescriptorFactory.cpp": {
+      "before": "603c6c6bcee00059ad9247be97ff3a773abe9d1bce96828a63773736dcda721f",
+      "after": "f4ea71fbbdb3aa232522fbcb16600fed17a9c7f1673cf4fc7b75920b510a7807"
+    },
+    "AndroidExpoViewComponentDescriptor.h": {
+      "before": "8de70321e20a5de43c25eec73c7fd1b5b0c8a8e8fece8476ce6a879e6ca591b0",
+      "after": "f41f0f33bd42e50229764d0244e143353814c226b3a55f197e284757d1ad97d1"
+    },
+    "FabricComponentsRegistry.cpp": {
+      "before": "9062a054230973e85dca1a35491309b635c11de88b7003feef4144bc96e5b371",
+      "after": "974fccfc57121c0f15998c88643cf8ef892a6a8523a5ff33c511026672a9b663"
+    },
+    "ExpoComponentDescriptorFactory.h": {
+      "before": "bb21e37b51db58c34bcd7d02a01d7bff804d597125df56634e034d613de0d473",
+      "after": "a5139afba7beb6c53938be51fb22a5360048b5e7781f3aa90cce1f0091493e6e"
+    },
+    "ExpoViewComponentRegistry.h": {
+      "before": null,
+      "after": "f217cf7bdcc5e5f4fd20d00d15b4cc517ab1c14c61332f759025ee86823cd67a"
+    },
+    "AndroidExpoViewComponentDescriptor.cpp": {
+      "before": "43af18848f364124ebd96f7949ae45e2999b54b2ca638af115fca1a40891caf0",
+      "after": "3d2318e54fed46134af698de045259a8a5b447c0bd909469453ffea9469a11f4"
+    }
+  }
+}

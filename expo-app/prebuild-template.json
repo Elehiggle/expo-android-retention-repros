@@ -1,0 +1,10 @@
+{
+  "expoVersion": "58.0.11",
+  "pathAfterNpmCi": "node_modules/expo/template.tgz",
+  "sha256": "4a4ec09db542654c15d32e85835832b2925e53165f04a1a6e8a2be30209d5ab2",
+  "templateName": "expo-template-bare-minimum",
+  "templateVersion": "58.0.20",
+  "gradleVersion": "9.4.1",
+  "observedBuildSelection": "Expo prebuild default embedded-template resolution; no explicit --template argument",
+  "documentedRepeatSelection": "--template ./node_modules/expo/template.tgz"
+}

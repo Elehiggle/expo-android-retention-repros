@@ -1,0 +1,26 @@
+{
+  "name": "expo-splash-activity-retention-repro",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "android": "EXPO_NO_METRO_LAZY=1 PROFILE=1 expo run:android --port 8093",
+    "start": "EXPO_NO_METRO_LAZY=1 PROFILE=1 expo start --port 8093"
+  },
+  "dependencies": {
+    "expo": "58.0.11",
+    "expo-splash-screen": "58.0.9",
+    "react": "19.3.0",
+    "react-native": "0.88.0",
+    "expo-modules-core": "58.0.19",
+    "expo-linear-gradient": "58.0.3"
+  },
+  "expo": {
+    "autolinking": {
+      "buildFromSource": [
+        "expo-splash-screen",
+        "expo-modules-core"
+      ]
+    }
+  }
+}

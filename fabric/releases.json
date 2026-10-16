@@ -1,0 +1,62 @@
+{
+  "distTags": {
+    "sdk-50": "1.11.11",
+    "sdk-51": "1.12.11",
+    "sdk-54": "3.0.30",
+    "canary-sdk-55": "55.0.13-canary-20260429-a5e59cf",
+    "canary-sdk-56": "56.0.14-canary-20260701-9100865",
+    "sdk-55": "55.0.26",
+    "canary": "58.0.0-canary-20260909-ea7a89a",
+    "sdk-56": "56.0.27",
+    "latest": "58.0.19",
+    "sdk-57": "57.0.23",
+    "next": "58.0.19"
+  },
+  "versions": {
+    "57.0.18": {
+      "version": "57.0.18",
+      "gitHead": "9e5319c0f821a27b7924841903abae50e2b41790",
+      "published": "2026-09-11T11:31:12.931Z",
+      "tarball": "https://registry.npmjs.org/expo-modules-core/-/expo-modules-core-57.0.18.tgz",
+      "integrity": "sha512-ovB7C+GVQTlKAOIsOIHJVVXN9Mn0ljf2SYBS+afrRaGqq+HZEn1D3o+HReIVeH1NjCn/xDBb7I4HjldHs6luZA==",
+      "sha256": "9592e0d4dcc593cc8224cb92f35648c6be82e7c672d5fc914158f7b96266be91",
+      "files": {
+        "android/src/main/cpp/fabric/FabricComponentsRegistry.cpp": "d89d0e2da67e793e6875f09e2ff8f33681f9037c093dc8d45c2b4127315d06f6",
+        "android/src/main/cpp/fabric/ExpoComponentDescriptorFactory.cpp": "209b42b9a9cb72f3dbc5106c7e024af981eacebd2438b1659a988330acf0632b",
+        "android/src/main/cpp/fabric/ExpoComponentDescriptorFactory.h": "482500d4057c3ef8af76a887d74b0d1c83502a1a5321471779382904748b4364",
+        "android/src/main/cpp/fabric/AndroidExpoViewComponentDescriptor.h": "8de70321e20a5de43c25eec73c7fd1b5b0c8a8e8fece8476ce6a879e6ca591b0",
+        "android/src/main/cpp/fabric/AndroidExpoViewComponentDescriptor.cpp": "7f0286acdab137943bf2de8fc4527248ed4621e5bb95165c26bb3e821cd8a15f"
+      }
+    },
+    "57.0.23": {
+      "version": "57.0.23",
+      "gitHead": "0607af7a70d0ea3e58a6d55824aac5cfd3e78613",
+      "published": "2026-10-14T16:35:22.439Z",
+      "tarball": "https://registry.npmjs.org/expo-modules-core/-/expo-modules-core-57.0.23.tgz",
+      "integrity": "sha512-vZQoSlhqU6me5K4KCl42yXB0x3zqAiG2FAjzHmbuez77CslJJQ+82cmJoHC3tN5X8o/KxRArJejKNQIeciyoXA==",
+      "sha256": "8aeb67ba47e385205a59f087485c9391828ed3eb2fb7db3ec1b0ef733ccf9298",
+      "files": {
+        "android/src/main/cpp/fabric/FabricComponentsRegistry.cpp": "d89d0e2da67e793e6875f09e2ff8f33681f9037c093dc8d45c2b4127315d06f6",
+        "android/src/main/cpp/fabric/ExpoComponentDescriptorFactory.cpp": "209b42b9a9cb72f3dbc5106c7e024af981eacebd2438b1659a988330acf0632b",
+        "android/src/main/cpp/fabric/ExpoComponentDescriptorFactory.h": "482500d4057c3ef8af76a887d74b0d1c83502a1a5321471779382904748b4364",
+        "android/src/main/cpp/fabric/AndroidExpoViewComponentDescriptor.h": "8de70321e20a5de43c25eec73c7fd1b5b0c8a8e8fece8476ce6a879e6ca591b0",
+        "android/src/main/cpp/fabric/AndroidExpoViewComponentDescriptor.cpp": "7f0286acdab137943bf2de8fc4527248ed4621e5bb95165c26bb3e821cd8a15f"
+      }
+    },
+    "58.0.19": {
+      "version": "58.0.19",
+      "gitHead": null,
+      "published": "2026-10-15T19:41:09.199Z",
+      "tarball": "https://registry.npmjs.org/expo-modules-core/-/expo-modules-core-58.0.19.tgz",
+      "integrity": "sha512-4AZnsKLSpEv2PhF4W5n73KkZJo0TjiSXBpDREX4HXZVhE0AC/KeYieCqyYyMsKMfWFuCTpI0m3HPmhvL2tnQHw==",
+      "sha256": "3563d7a99e221d237d6d41df8521388ac93dd912a677a861d2128130e33fca5e",
+      "files": {
+        "android/src/main/cpp/fabric/FabricComponentsRegistry.cpp": "9062a054230973e85dca1a35491309b635c11de88b7003feef4144bc96e5b371",
+        "android/src/main/cpp/fabric/ExpoComponentDescriptorFactory.cpp": "603c6c6bcee00059ad9247be97ff3a773abe9d1bce96828a63773736dcda721f",
+        "android/src/main/cpp/fabric/ExpoComponentDescriptorFactory.h": "bb21e37b51db58c34bcd7d02a01d7bff804d597125df56634e034d613de0d473",
+        "android/src/main/cpp/fabric/AndroidExpoViewComponentDescriptor.h": "8de70321e20a5de43c25eec73c7fd1b5b0c8a8e8fece8476ce6a879e6ca591b0",
+        "android/src/main/cpp/fabric/AndroidExpoViewComponentDescriptor.cpp": "43af18848f364124ebd96f7949ae45e2999b54b2ca638af115fca1a40891caf0"
+      }
+    }
+  }
+}

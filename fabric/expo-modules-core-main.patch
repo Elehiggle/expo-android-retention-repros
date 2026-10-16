@@ -1,0 +1,296 @@
+diff --git a/.changeset/core-android-stable-fabric-registrations.md b/.changeset/core-android-stable-fabric-registrations.md
+new file mode 100644
+index 0000000..52f09ce
+--- /dev/null
++++ b/.changeset/core-android-stable-fabric-registrations.md
+@@ -0,0 +1,5 @@
++---
++'expo-modules-core': patch
++---
++
++[Android] Reuse Fabric component handles across app context reloads instead of retaining a new provider and state-prop schema for each registration.
+diff --git a/packages/expo-modules-core/android/src/main/cpp/fabric/AndroidExpoViewComponentDescriptor.cpp b/packages/expo-modules-core/android/src/main/cpp/fabric/AndroidExpoViewComponentDescriptor.cpp
+index 674c385..4787c08 100644
+--- a/packages/expo-modules-core/android/src/main/cpp/fabric/AndroidExpoViewComponentDescriptor.cpp
++++ b/packages/expo-modules-core/android/src/main/cpp/fabric/AndroidExpoViewComponentDescriptor.cpp
+@@ -10,13 +10,10 @@ struct RawPropsAccessor {
+   jsi::Value value_;
+ };
+ 
+-void AndroidExpoViewComponentDescriptor::setStateProps(
+-  const std::unordered_map<
+-    std::string,
+-    std::shared_ptr<FrontendConverter>
+-  > &stateProps
++void AndroidExpoViewComponentDescriptor::setComponentRegistration(
++  std::shared_ptr<ExpoViewComponentRegistration> registration
+ ) {
+-  stateProps_ = stateProps;
++  registration_ = std::move(registration);
+ }
+ 
+ react::Props::Shared AndroidExpoViewComponentDescriptor::cloneProps(
+@@ -30,6 +27,12 @@ react::Props::Shared AndroidExpoViewComponentDescriptor::cloneProps(
+ 
+   rawProps.parse(rawPropsParser_);
+ 
++  // A reload can replace the schema while a render still uses its previous snapshot.
++  const auto stateProps = registration_ ? registration_->getStateProps() : nullptr;
++  const auto filterObjectKeys = [&stateProps](const std::string &key) {
++    return stateProps && stateProps->find(key) != stateProps->end();
++  };
++
+   const auto &sourceProps = props
+     ? dynamic_cast<const AndroidExpoViewProps &>(*props)
+     : *ExpoViewShadowNode<AndroidExpoViewProps>::defaultSharedProps();
+@@ -38,21 +41,21 @@ react::Props::Shared AndroidExpoViewComponentDescriptor::cloneProps(
+     context,
+     sourceProps,
+     rawProps,
+-    filterObjectKeys_
++    filterObjectKeys
+   );
+ 
+ #ifdef RN_SERIALIZABLE_STATE
+-  shadowNodeProps->initializeDynamicProps(sourceProps, rawProps, filterObjectKeys_);
++  shadowNodeProps->initializeDynamicProps(sourceProps, rawProps, filterObjectKeys);
+ #endif
+ 
+-  if (!stateProps_.empty()) {
++  if (stateProps && !stateProps->empty()) {
+     JNIEnv *env = jni::Environment::current();
+     const auto &rawPropsAccessor = *((RawPropsAccessor *) &rawProps);
+ 
+     jsi::Runtime &runtime = *rawPropsAccessor.runtime_;
+     const auto jsiProps = rawPropsAccessor.value_.asObject(runtime);
+ 
+-    for (const auto &statePropPair: stateProps_) {
++    for (const auto &statePropPair: *stateProps) {
+       const auto &[propName, converter] = statePropPair;
+ 
+       const auto jsPropName = jsi::String::createFromUtf8(runtime, propName);
+diff --git a/packages/expo-modules-core/android/src/main/cpp/fabric/AndroidExpoViewComponentDescriptor.h b/packages/expo-modules-core/android/src/main/cpp/fabric/AndroidExpoViewComponentDescriptor.h
+index 18399ac..ad6bed7 100644
+--- a/packages/expo-modules-core/android/src/main/cpp/fabric/AndroidExpoViewComponentDescriptor.h
++++ b/packages/expo-modules-core/android/src/main/cpp/fabric/AndroidExpoViewComponentDescriptor.h
+@@ -4,6 +4,7 @@
+ #include "AndroidExpoViewProps.h"
+ #include "AndroidExpoViewState.h"
+ #include "../types/FrontendConverter.h"
++#include "ExpoViewComponentRegistry.h"
+ 
+ namespace react = facebook::react;
+ 
+@@ -17,12 +18,7 @@ public:
+ 
+   using Base::ExpoViewComponentDescriptor;
+ 
+-  void setStateProps(
+-    const std::unordered_map<
+-      std::string,
+-      std::shared_ptr<FrontendConverter>
+-    > &stateProps
+-  );
++  void setComponentRegistration(std::shared_ptr<ExpoViewComponentRegistration> registration);
+ 
+   react::Props::Shared cloneProps(
+     const react::PropsParserContext &context,
+@@ -33,14 +29,7 @@ public:
+   void adopt(react::ShadowNode &shadowNode) const override;
+ 
+ private:
+-  std::unordered_map<
+-    std::string,
+-    std::shared_ptr<FrontendConverter>
+-  > stateProps_;
+-
+-  std::function<bool(const std::string &)> filterObjectKeys_ = [this](const std::string &key) {
+-    return stateProps_.find(key) != stateProps_.end();
+-  };
++  std::shared_ptr<ExpoViewComponentRegistration> registration_;
+ };
+ 
+ } // namespace expo
+diff --git a/packages/expo-modules-core/android/src/main/cpp/fabric/ExpoComponentDescriptorFactory.cpp b/packages/expo-modules-core/android/src/main/cpp/fabric/ExpoComponentDescriptorFactory.cpp
+index cb732ae..befa47b 100644
+--- a/packages/expo-modules-core/android/src/main/cpp/fabric/ExpoComponentDescriptorFactory.cpp
++++ b/packages/expo-modules-core/android/src/main/cpp/fabric/ExpoComponentDescriptorFactory.cpp
+@@ -7,8 +7,10 @@ namespace react = facebook::react;
+ 
+ namespace expo {
+ 
+-StatePropMapType statePropMap = {};
+-std::shared_mutex statePropMapMutex;
++ExpoViewComponentRegistry &getExpoViewComponentRegistry() {
++  static ExpoViewComponentRegistry registry;
++  return registry;
++}
+ 
+ react::ComponentDescriptor::Unique concreteExpoComponentDescriptorConstructor(
+   const react::ComponentDescriptorParameters &parameters
+@@ -18,13 +20,9 @@ react::ComponentDescriptor::Unique concreteExpoComponentDescriptorConstructor(
+     react::RawPropsParser(/*useRawPropsJsiValue=*/true)
+   );
+ 
+-  std::shared_lock lock(statePropMapMutex);
+-  if (statePropMap.contains(std::static_pointer_cast<std::string const>(parameters.flavor))) {
+-    descriptor->setStateProps(
+-      statePropMap.at(
+-        std::static_pointer_cast<std::string const>(parameters.flavor)
+-      )
+-    );
++  auto flavor = std::static_pointer_cast<std::string const>(parameters.flavor);
++  if (auto registration = getExpoViewComponentRegistry().find(*flavor)) {
++    descriptor->setComponentRegistration(std::move(registration));
+   }
+ 
+   return descriptor;
+diff --git a/packages/expo-modules-core/android/src/main/cpp/fabric/ExpoComponentDescriptorFactory.h b/packages/expo-modules-core/android/src/main/cpp/fabric/ExpoComponentDescriptorFactory.h
+index e78a68d..7ffc4b0 100644
+--- a/packages/expo-modules-core/android/src/main/cpp/fabric/ExpoComponentDescriptorFactory.h
++++ b/packages/expo-modules-core/android/src/main/cpp/fabric/ExpoComponentDescriptorFactory.h
+@@ -3,24 +3,13 @@
+ #pragma once
+ 
+ #include <react/renderer/core/ComponentDescriptor.h>
+-#include "../types/FrontendConverter.h"
+-
+-#include <shared_mutex>
++#include "ExpoViewComponentRegistry.h"
+ 
+ namespace react = facebook::react;
+ 
+ namespace expo {
+ 
+-using StatePropMapType = std::unordered_map<
+-  react::ComponentDescriptor::Flavor,
+-  std::unordered_map<std::string, std::shared_ptr<FrontendConverter>>
+->;
+-
+-extern StatePropMapType statePropMap;
+-
+-// Guards `statePropMap`. It is written when Expo registers its view components and read
+-// when React Native builds a component descriptor registry, and these can run on different threads.
+-extern std::shared_mutex statePropMapMutex;
++ExpoViewComponentRegistry &getExpoViewComponentRegistry();
+ 
+ react::ComponentDescriptor::Unique concreteExpoComponentDescriptorConstructor(
+   const react::ComponentDescriptorParameters &parameters
+diff --git a/packages/expo-modules-core/android/src/main/cpp/fabric/ExpoViewComponentRegistry.h b/packages/expo-modules-core/android/src/main/cpp/fabric/ExpoViewComponentRegistry.h
+new file mode 100644
+index 0000000..aaa5f32
+--- /dev/null
++++ b/packages/expo-modules-core/android/src/main/cpp/fabric/ExpoViewComponentRegistry.h
+@@ -0,0 +1,73 @@
++// Copyright 2018-present 650 Industries. All rights reserved.
++
++#pragma once
++
++#include <memory>
++#include <mutex>
++#include <string>
++#include <unordered_map>
++#include <utility>
++
++namespace expo {
++
++class FrontendConverter;
++using ExpoViewStateProps = std::unordered_map<std::string, std::shared_ptr<FrontendConverter>>;
++
++class ExpoViewComponentRegistration {
++public:
++  ExpoViewComponentRegistration(std::string name, ExpoViewStateProps stateProps)
++    : flavor(std::make_shared<const std::string>(std::move(name))),
++      stateProps_(std::make_shared<const ExpoViewStateProps>(std::move(stateProps))) {}
++
++  const std::shared_ptr<const std::string> flavor;
++
++  std::shared_ptr<const ExpoViewStateProps> getStateProps() const {
++    std::lock_guard lock(mutex_);
++    return stateProps_;
++  }
++
++  void setStateProps(ExpoViewStateProps stateProps) {
++    auto snapshot = std::make_shared<const ExpoViewStateProps>(std::move(stateProps));
++    std::lock_guard lock(mutex_);
++    stateProps_ = std::move(snapshot);
++  }
++
++private:
++  mutable std::mutex mutex_;
++  std::shared_ptr<const ExpoViewStateProps> stateProps_;
++};
++
++class ExpoViewComponentRegistry {
++public:
++  std::shared_ptr<ExpoViewComponentRegistration> registerComponent(
++    std::string name,
++    ExpoViewStateProps stateProps
++  ) {
++    std::lock_guard lock(mutex_);
++    auto it = registrations_.find(name);
++    if (it != registrations_.end()) {
++      // AppContext reloads may change state props; retain only the current schema.
++      it->second->setStateProps(std::move(stateProps));
++      return it->second;
++    }
++
++    auto registration = std::make_shared<ExpoViewComponentRegistration>(
++      name, std::move(stateProps)
++    );
++    registrations_.emplace(std::move(name), registration);
++    return registration;
++  }
++
++  std::shared_ptr<ExpoViewComponentRegistration> find(const std::string &name) const {
++    std::lock_guard lock(mutex_);
++    auto it = registrations_.find(name);
++    return it != registrations_.end() ? it->second : nullptr;
++  }
++
++private:
++  mutable std::mutex mutex_;
++  // RN retains providers for the process lifetime and identifies them by this name pointer.
++  std::unordered_map<std::string, std::shared_ptr<ExpoViewComponentRegistration>> registrations_;
++};
++
++} // namespace expo
+diff --git a/packages/expo-modules-core/android/src/main/cpp/fabric/FabricComponentsRegistry.cpp b/packages/expo-modules-core/android/src/main/cpp/fabric/FabricComponentsRegistry.cpp
+index 61a8f7f..ba19cf7 100644
+--- a/packages/expo-modules-core/android/src/main/cpp/fabric/FabricComponentsRegistry.cpp
++++ b/packages/expo-modules-core/android/src/main/cpp/fabric/FabricComponentsRegistry.cpp
+@@ -42,10 +42,8 @@ void FabricComponentsRegistry::registerComponentsRegistry(
+   auto frontendConverterProvider = FrontendConverterProvider::instance();
+ 
+   for (size_t i = 0; i < size; ++i) {
+-    auto flavor = std::make_shared<std::string const>(componentNames->getElement(i)->toStdString());
+-    auto componentName = react::ComponentName{flavor->c_str()};
+-
+-    std::unordered_map<std::string, std::shared_ptr<FrontendConverter>> propMap;
++    auto name = componentNames->getElement(i)->toStdString();
++    ExpoViewStateProps propMap;
+ 
+     auto propNames = statePropNames->getElement(i);
+     auto propTypes = statePropTypes->getElement(i);
+@@ -58,15 +56,13 @@ void FabricComponentsRegistry::registerComponentsRegistry(
+       propMap.emplace(propName, converter);
+     }
+ 
+-    {
+-      // Released before `add` below, which constructs descriptors that take the shared lock.
+-      std::unique_lock lock(statePropMapMutex);
+-      statePropMap.insert_or_assign(
+-        flavor,
+-        propMap
+-      );
+-    }
++    auto registration = getExpoViewComponentRegistry().registerComponent(
++      std::move(name), std::move(propMap)
++    );
++    auto flavor = registration->flavor;
++    auto componentName = react::ComponentName{flavor->c_str()};
+ 
++    // add() can synchronously call our descriptor factory; hold no Expo registry lock here.
+     providerRegistry->add(react::ComponentDescriptorProvider{
+       reinterpret_cast<react::ComponentHandle>(componentName),
+       componentName,

@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-16",
+  "device": "Android emulator, API 37",
+  "base_commit": "aaf153746ff4eba1f8399eff9b08e804114bf1c2",
+  "npm_manager_version": "58.0.9",
+  "androidx_core_splashscreen": "1.2.0",
+  "before": {
+    "native_build_exit": 0,
+    "instrumentation_code": 0,
+    "result": "FAIL",
+    "headless_options": "PASS",
+    "newer_owner": "PASS",
+    "destroyed_owner": "FAIL",
+    "destroyed_activity": "FAIL",
+    "options_after_destroy": "not reached after expected failure",
+    "apk_sha256": "6ae64cec03e7ed77e4f4a00cab882a265110e5d638b6241a6ccc83474f6ed873"
+  },
+  "after": {
+    "native_build_exit": 0,
+    "instrumentation_code": -1,
+    "result": "PASS",
+    "headless_options": "PASS",
+    "newer_owner": "PASS",
+    "destroyed_owner": "PASS",
+    "destroyed_activity": "PASS",
+    "options_after_destroy": "PASS",
+    "apk_sha256": "0eea41445583947e842e49390992cae3f7a58b508276eb4b84de64efab662d04"
+  },
+  "scope": "Real Activities, platform and AndroidX splash implementation, exact upstream/candidate manager; ReactMarker and options record are test doubles. No full Expo/RN integration result or older-Android claim.",
+  "transcript_sha256": {
+    "before-artifact-instrumentation.log": "90c5d68cec83f43024629799685085d1947e44c6ad5243902198f6041dc5e197",
+    "after-instrumentation.log": "5cb98c778b373b73132d04f57891841c818d2d3d7516c457f2d2fa44a420ea06"
+  },
+  "harness_sha256": "72ae8630a053710f97a611afe3ee75221f30a27905340b883d6ca6a8cac3ac6c"
+}

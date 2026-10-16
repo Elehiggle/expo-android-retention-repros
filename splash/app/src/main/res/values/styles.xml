@@ -1,0 +1,8 @@
+<resources>
+  <style name="AppTheme" parent="android:style/Theme.Material.Light.NoActionBar"><item name="android:windowLightStatusBar">true</item></style>
+  <style name="StartingTheme" parent="Theme.SplashScreen">
+    <item name="windowSplashScreenBackground">#FFFFFF</item>
+    <item name="windowSplashScreenAnimatedIcon">@android:drawable/sym_def_app_icon</item>
+    <item name="postSplashScreenTheme">@style/AppTheme</item>
+  </style>
+</resources>

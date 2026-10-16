@@ -1,0 +1,99 @@
+{
+  "expo_splash_screen": {
+    "version": "58.0.9",
+    "mode": "after",
+    "source": "sources/after/SplashScreenManager.kt",
+    "source_sha256": "e95953e3a6dba275eb167519796df78bde99e7d19d55e9ef91c95dad1b44e9c7",
+    "installed_sha256": "e95953e3a6dba275eb167519796df78bde99e7d19d55e9ef91c95dad1b44e9c7"
+  },
+  "expo_modules_core": {
+    "version": "58.0.19",
+    "mode": "after",
+    "files": {
+      "ExpoComponentDescriptorFactory.cpp": {
+        "before_sha256": "603c6c6bcee00059ad9247be97ff3a773abe9d1bce96828a63773736dcda721f",
+        "after_sha256": "f4ea71fbbdb3aa232522fbcb16600fed17a9c7f1673cf4fc7b75920b510a7807",
+        "installed_sha256": "f4ea71fbbdb3aa232522fbcb16600fed17a9c7f1673cf4fc7b75920b510a7807"
+      },
+      "AndroidExpoViewComponentDescriptor.h": {
+        "before_sha256": "8de70321e20a5de43c25eec73c7fd1b5b0c8a8e8fece8476ce6a879e6ca591b0",
+        "after_sha256": "f41f0f33bd42e50229764d0244e143353814c226b3a55f197e284757d1ad97d1",
+        "installed_sha256": "f41f0f33bd42e50229764d0244e143353814c226b3a55f197e284757d1ad97d1"
+      },
+      "FabricComponentsRegistry.cpp": {
+        "before_sha256": "9062a054230973e85dca1a35491309b635c11de88b7003feef4144bc96e5b371",
+        "after_sha256": "974fccfc57121c0f15998c88643cf8ef892a6a8523a5ff33c511026672a9b663",
+        "installed_sha256": "974fccfc57121c0f15998c88643cf8ef892a6a8523a5ff33c511026672a9b663"
+      },
+      "ExpoComponentDescriptorFactory.h": {
+        "before_sha256": "bb21e37b51db58c34bcd7d02a01d7bff804d597125df56634e034d613de0d473",
+        "after_sha256": "a5139afba7beb6c53938be51fb22a5360048b5e7781f3aa90cce1f0091493e6e",
+        "installed_sha256": "a5139afba7beb6c53938be51fb22a5360048b5e7781f3aa90cce1f0091493e6e"
+      },
+      "ExpoViewComponentRegistry.h": {
+        "before_sha256": null,
+        "after_sha256": "f217cf7bdcc5e5f4fd20d00d15b4cc517ab1c14c61332f759025ee86823cd67a",
+        "installed_sha256": "f217cf7bdcc5e5f4fd20d00d15b4cc517ab1c14c61332f759025ee86823cd67a"
+      },
+      "AndroidExpoViewComponentDescriptor.cpp": {
+        "before_sha256": "43af18848f364124ebd96f7949ae45e2999b54b2ca638af115fca1a40891caf0",
+        "after_sha256": "3d2318e54fed46134af698de045259a8a5b447c0bd909469453ffea9469a11f4",
+        "installed_sha256": "3d2318e54fed46134af698de045259a8a5b447c0bd909469453ffea9469a11f4"
+      }
+    }
+  },
+  "package_lock_sha256": "005fbf98238390cb17cdfcdee3e72c90ae57a511553aa2e60291449a660352ee",
+  "expo_app_config_sha256": "cff5b4f721422f82f42918b72ba4ef2a617bbb184dd7e67fabe6af5c23dc1d4e",
+  "app_js_sha256": "f9705c76909bf6c3fcd1d95956199083181242f34c53c2ccdf3ef61295579748",
+  "expo_linear_gradient": {
+    "version": "58.0.3",
+    "package_json_sha256": "670894077583c86c17b9477fb56fdcb898bf0e43c201236380fe2e039afa33f1",
+    "android_sources": {
+      "android/src/main/AndroidManifest.xml": "844e510155ee78d36b6238ef065340c63a1f8a21478d3c5755679d13659cbcf4",
+      "android/src/main/java/expo/modules/lineargradient/LinearGradientModule.kt": "56ad096d45f84fa3f1ffb317d6d8b5cb77d4d82a47392bb897aa656f59e2d71d",
+      "android/src/main/java/expo/modules/lineargradient/LinearGradientView.java": "7e78b8176b1e7daa730cbef045d2da0bfb0c0cdbfc2da9f4c870d0855011609e"
+    }
+  },
+  "toolchain": {
+    "node": "24.18.0",
+    "npm": "11.16.0",
+    "java": "17.0.20.1",
+    "ndk": "27.1.12297006",
+    "gradle": "9.4.1",
+    "expo": "58.0.11",
+    "reactNative": "0.88.0",
+    "androidApi": 37,
+    "runtimeAbi": "x86_64"
+  },
+  "checks": {
+    "npmInstallExit": 0,
+    "expoPrebuildExit": 0,
+    "gradleAssembleDebugExit": 0,
+    "coreCppSourceAbis": [
+      "arm64-v8a",
+      "armeabi-v7a",
+      "x86",
+      "x86_64"
+    ],
+    "splashKotlinSourceCompilation": "passed",
+    "coldLaunch": "passed",
+    "nativeGradientColorUpdates": "passed",
+    "activityRecreates": 3,
+    "sameProcessAcrossRecreates": true,
+    "postRecreateGradientColorUpdates": "passed",
+    "repeatedSetOptions": 3,
+    "finishRemovedActivityWhileProcessRemainedAlive": true,
+    "fatalExceptions": 0,
+    "reactNativeJsErrors": 0,
+    "fullAppHeapMeasurement": "not performed",
+    "expoMonorepoPackageChecks": "not run",
+    "olderAndroidApi31To33": "not tested"
+  },
+  "notes": [
+    "Both candidate patches were selected for this integration smoke; the isolated host tests establish each defect separately.",
+    "The gradient uses the official expo-linear-gradient 58.0.3 Maven artifact; core and splash compile from source.",
+    "One initial packager WebSocket retry warning occurred; the bundle loaded and continued running after recreation.",
+    "The recorded prebuild used Expo CLI default embedded-template resolution, without an explicit --template flag."
+  ],
+  "apkSha256": "28fd8049036395ee407958d0d843b2daa71c4a71273603563c01cc270a0497ac"
+}

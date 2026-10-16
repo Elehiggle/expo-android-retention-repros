@@ -1,0 +1,318 @@
+diff --git a/apps/bare-expo/Playground.tsx b/apps/bare-expo/Playground.tsx
+index 78f98158..8f591ad1 100644
+--- a/apps/bare-expo/Playground.tsx
++++ b/apps/bare-expo/Playground.tsx
+@@ -1,39 +1,105 @@
+-import { useTheme } from 'ThemeProvider';
++import { reloadAppAsync, requireNativeModule, requireNativeViewManager } from 'expo-modules-core';
++import * as SplashScreen from 'expo-splash-screen';
+ import * as React from 'react';
+-import { StyleSheet, Text, View } from 'react-native';
++import { Button, ScrollView, Text, type ViewProps } from 'react-native';
++
++type ProbeContext = {
++  pid: number;
++  moduleInstance: number;
++  appContext: number;
++  reactContext: number;
++  activity: number;
++};
++
++type SplashLifecycleProbe = {
++  probeCallbacksInstalled: boolean;
++  currentActivity: number;
++  destroyCount: number;
++  lastDestroyedActivity: number;
++  splashOwnerWasClearedOnDestroy: boolean;
++  splashOwnerPresentNow: boolean;
++};
++
++const Native = requireNativeModule<{
++  getRegistryProbeContext(): ProbeContext;
++  getSplashLifecycleProbe(): SplashLifecycleProbe;
++  recreateActivity(): number;
++}>('BenchmarkHelperModule');
++const Probe = requireNativeViewManager<ViewProps & { label: string; values: number[] }>(
++  'BenchmarkHelperModule'
++);
++const probeGlobal = globalThis as typeof globalThis & { __fabricProbeRuntimeId?: string };
++const runtimeId =
++  (probeGlobal.__fabricProbeRuntimeId ??= `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`);
++const values: number[][] = [[1, 2], [3, 5, 8], []];
+ 
+-// Empty scratch screen for isolating reproductions. Replace the contents with your repro code
+-// and open it from the Playground tab. Revert your changes before committing unrelated work.
+ export default function Playground() {
+-  const { theme } = useTheme();
++  const [phase, setPhase] = React.useState(0);
++  const [context, setContext] = React.useState(() => Native.getRegistryProbeContext());
++  const [splashLifecycle, setSplashLifecycle] = React.useState(() =>
++    Native.getSplashLifecycleProbe()
++  );
++  const [splashOptionsCallCount, setSplashOptionsCallCount] = React.useState(0);
++  const [status, setStatus] = React.useState('Ready');
++
++  const refreshNativeSnapshots = () => {
++    setContext(Native.getRegistryProbeContext());
++    setSplashLifecycle(Native.getSplashLifecycleProbe());
++  };
++
++  const applySplashOptions = () => {
++    SplashScreen.setOptions({ duration: 0, fade: true });
++    SplashScreen.setOptions({ duration: 150, fade: true });
++    SplashScreen.setOptions({ duration: 450, fade: false });
++    setSplashOptionsCallCount((count) => count + 3);
++    setStatus('Called SplashScreen.setOptions three times');
++  };
++
+   return (
+-    <View style={[styles.container, { backgroundColor: theme.background.default }]}>
+-      <Text style={styles.icon}>🧪</Text>
+-      <Text style={[styles.title, { color: theme.text.default }]}>Playground</Text>
+-      <Text style={[styles.subtitle, { color: theme.text.secondary }]}>
+-        Replace the contents of apps/bare-expo/Playground.tsx with your repro code.
++    <ScrollView contentContainerStyle={{ gap: 16, padding: 24 }}>
++      <Text testID="registry-probe-runtime">JS runtime: {runtimeId}</Text>
++      <Text testID="registry-probe-context">Native context: {JSON.stringify(context)}</Text>
++      <Text testID="registry-probe-expected">
++        {`phase-${phase}: ${JSON.stringify(values[phase])}`}
+       </Text>
+-    </View>
++      <Probe
++        testID="registry-probe-native"
++        style={{ width: 300, height: 100 }}
++        label={`phase-${phase}`}
++        values={values[phase]}
++      />
++      <Button
++        testID="registry-probe-update"
++        title="Update native props"
++        onPress={() => setPhase((value) => (value + 1) % values.length)}
++      />
++      <Button
++        testID="registry-probe-reload"
++        title="Reload React runtime"
++        onPress={() => void reloadAppAsync('Fabric registry smoke')}
++      />
++      <Text testID="splash-probe-lifecycle">Splash lifecycle: {JSON.stringify(splashLifecycle)}</Text>
++      <Text testID="splash-probe-status">
++        {`${status}; setOptions calls this runtime: ${splashOptionsCallCount}`}
++      </Text>
++      <Button
++        testID="splash-probe-options"
++        title="Apply 3 Splash options"
++        onPress={applySplashOptions}
++      />
++      <Button
++        testID="splash-probe-recreate"
++        title="Recreate Android Activity"
++        onPress={() => {
++          const identity = Native.recreateActivity();
++          setStatus(`Scheduled Activity.recreate for ${identity}`);
++        }}
++      />
++      <Button
++        testID="splash-probe-refresh"
++        title="Refresh native snapshots"
++        onPress={refreshNativeSnapshots}
++      />
++    </ScrollView>
+   );
+ }
+-
+-const styles = StyleSheet.create({
+-  container: {
+-    flex: 1,
+-    alignItems: 'center',
+-    justifyContent: 'center',
+-    gap: 8,
+-    padding: 24,
+-  },
+-  icon: {
+-    fontSize: 48,
+-  },
+-  title: {
+-    fontSize: 20,
+-    fontWeight: '600',
+-  },
+-  subtitle: {
+-    fontSize: 14,
+-    textAlign: 'center',
+-  },
+-});
+diff --git a/apps/bare-expo/modules/benchmark-helper/android/src/main/java/expo/modules/benchmarkhelper/BenchmarkHelperModule.kt b/apps/bare-expo/modules/benchmark-helper/android/src/main/java/expo/modules/benchmarkhelper/BenchmarkHelperModule.kt
+index da10e510..768731cc 100644
+--- a/apps/bare-expo/modules/benchmark-helper/android/src/main/java/expo/modules/benchmarkhelper/BenchmarkHelperModule.kt
++++ b/apps/bare-expo/modules/benchmark-helper/android/src/main/java/expo/modules/benchmarkhelper/BenchmarkHelperModule.kt
+@@ -1,14 +1,171 @@
+ package expo.modules.benchmarkhelper
+ 
++import android.app.Activity
++import android.app.Application
++import android.content.Context
++import android.os.Bundle
++import android.os.Process
++import android.widget.LinearLayout
++import android.widget.TextView
++import expo.modules.kotlin.AppContext
+ import expo.modules.kotlin.modules.Module
+ import expo.modules.kotlin.modules.ModuleDefinition
++import expo.modules.kotlin.views.ExpoView
++import java.util.concurrent.ConcurrentHashMap
++import java.util.concurrent.atomic.AtomicBoolean
++import java.util.concurrent.atomic.AtomicInteger
+ 
+ class BenchmarkHelperModule : Module() {
++  private val probeInstance = nextProbeInstance.incrementAndGet()
++
+   override fun definition() = ModuleDefinition {
+     Name("BenchmarkHelperModule")
+ 
++    OnCreate {
++      val activity = requireNotNull(appContext.currentActivity) {
++        "Registry probe module was created without a current Activity"
++      }
++      watchedActivityIds.add(System.identityHashCode(activity))
++      val reactContext = requireNotNull(appContext.reactContext) {
++        "Registry probe module was created without a ReactContext"
++      }
++      val application = requireNotNull(reactContext.applicationContext as? Application) {
++        "Registry probe could not resolve the Android Application"
++      }
++      registerProbeLifecycleCallbacks(application)
++    }
++
+     Function("reportFullyDrawn") {
+       BenchmarkManager.reportFullyDrawn(appContext.currentActivity)
+     }
++
++    Function("getRegistryProbeContext") {
++      val activity = requireNotNull(appContext.currentActivity) {
++        "Registry probe snapshot requires a current Activity"
++      }
++      val reactContext = requireNotNull(appContext.reactContext) {
++        "Registry probe snapshot requires a ReactContext"
++      }
++      mapOf(
++        "pid" to Process.myPid(),
++        "moduleInstance" to probeInstance,
++        "appContext" to System.identityHashCode(appContext),
++        "reactContext" to System.identityHashCode(reactContext),
++        "activity" to System.identityHashCode(activity)
++      )
++    }
++
++    Function("getSplashLifecycleProbe") {
++      val activity = requireNotNull(appContext.currentActivity) {
++        "Splash lifecycle snapshot requires a current Activity"
++      }
++      check(lifecycleCallbacksInstalled.get()) {
++        "Splash lifecycle probe callback is not installed"
++      }
++      mapOf(
++        "probeCallbacksInstalled" to lifecycleCallbacksInstalled.get(),
++        "currentActivity" to System.identityHashCode(activity),
++        "destroyCount" to destroyedActivityCount.get(),
++        "lastDestroyedActivity" to lastDestroyedActivityId,
++        "splashOwnerWasClearedOnDestroy" to splashOwnerClearedOnLastDestroy,
++        "splashOwnerPresentNow" to isSplashOwnerPresent()
++      )
++    }
++
++    Function("recreateActivity") {
++      val activity = requireNotNull(appContext.currentActivity) {
++        "Activity recreation probe requires a current Activity"
++      }
++      activity.runOnUiThread { activity.recreate() }
++      System.identityHashCode(activity)
++    }
++
++    View(RegistryProbeView::class) {
++      Prop("values") { view: RegistryProbeView, values: List<Int> ->
++        view.setProbeValues(values)
++      }.asStateProp()
++
++      Prop("label") { view: RegistryProbeView, label: String ->
++        view.setProbeLabel(label)
++      }
++    }
++  }
++
++  companion object {
++    private val nextProbeInstance = AtomicInteger()
++    private val lifecycleCallbacksInstalled = AtomicBoolean()
++    private val watchedActivityIds = ConcurrentHashMap.newKeySet<Int>()
++    private val destroyedActivityCount = AtomicInteger()
++
++    @Volatile
++    private var lastDestroyedActivityId = 0
++
++    @Volatile
++    private var splashOwnerClearedOnLastDestroy = false
++
++    private fun registerProbeLifecycleCallbacks(application: Application) {
++      if (!lifecycleCallbacksInstalled.compareAndSet(false, true)) {
++        return
++      }
++
++      application.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
++        override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
++          if (activity.javaClass.name == "dev.expo.payments.MainActivity") {
++            watchedActivityIds.add(System.identityHashCode(activity))
++          }
++        }
++
++        override fun onActivityStarted(activity: Activity) {}
++        override fun onActivityResumed(activity: Activity) {}
++        override fun onActivityPaused(activity: Activity) {}
++        override fun onActivityStopped(activity: Activity) {}
++        override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
++
++        override fun onActivityDestroyed(activity: Activity) {
++          val identity = System.identityHashCode(activity)
++          if (!watchedActivityIds.contains(identity)) {
++            return
++          }
++          lastDestroyedActivityId = identity
++          splashOwnerClearedOnLastDestroy = !isSplashOwnerPresent()
++          destroyedActivityCount.incrementAndGet()
++        }
++      })
++    }
++
++    private fun isSplashOwnerPresent(): Boolean {
++      val managerClass = Class.forName("expo.modules.splashscreen.SplashScreenManager")
++      val manager = managerClass.getDeclaredField("INSTANCE").get(null)
++      val field = managerClass.getDeclaredField("splashScreen")
++      field.isAccessible = true
++      return field.get(manager) != null
++    }
++  }
++}
++
++class RegistryProbeView(context: Context, appContext: AppContext) : ExpoView(context, appContext) {
++  override val shouldUseAndroidLayout = true
++  private val output = TextView(context)
++  private var probeLabel = "unset"
++  private var probeValues = "unset"
++
++  init {
++    addView(output, LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT))
++    renderProbe()
++  }
++
++  fun setProbeValues(values: List<Int>) {
++    probeValues = values.joinToString(prefix = "[", postfix = "]")
++    renderProbe()
++  }
++
++  fun setProbeLabel(label: String) {
++    probeLabel = label
++    renderProbe()
++  }
++
++  private fun renderProbe() {
++    output.text = "$probeLabel: $probeValues"
++    output.contentDescription = "native registry probe $probeLabel: $probeValues"
+   }
+ }

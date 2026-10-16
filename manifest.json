@@ -1,0 +1,668 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "publicationStatus": "Public reproduction package",
+  "expoBaseCommit": "aaf153746ff4eba1f8399eff9b08e804114bf1c2",
+  "reactNativeBaseCommit": "5c35c82cf7dd322bf94d47501508c3de975c077b",
+  "finalExpoPackageLockSha256": "005fbf98238390cb17cdfcdee3e72c90ae57a511553aa2e60291449a660352ee",
+  "files": [
+    {
+      "path": ".gitignore",
+      "bytes": 107,
+      "sha256": "c04da63a78b2aead4085d2cd2346a1c385d63eb3cd16293a767ed02475ab1640",
+      "executable": false
+    },
+    {
+      "path": "CHECKS.md",
+      "bytes": 2840,
+      "sha256": "cfbebbb2bd2bdf11c61088624cad56543ea7fef41a194bfbee5ab9455753d181",
+      "executable": false
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 1160,
+      "sha256": "39e26e7a32a5f1fd605a56d7d2e0716d6c4a170fa91a2db8105f06dee1844d92",
+      "executable": false
+    },
+    {
+      "path": "README.md",
+      "bytes": 4138,
+      "sha256": "b624772ad0064fce2cf4042dadf6edfc4ec58e6531f7c9e1823d82d2e363f79d",
+      "executable": false
+    },
+    {
+      "path": "expo-app/.gitignore",
+      "bytes": 35,
+      "sha256": "685fa1d56dd0fe16cc037363332fa1e6c11663aa07bed9785f1e503234056f30",
+      "executable": false
+    },
+    {
+      "path": "expo-app/App.js",
+      "bytes": 1188,
+      "sha256": "f9705c76909bf6c3fcd1d95956199083181242f34c53c2ccdf3ef61295579748",
+      "executable": false
+    },
+    {
+      "path": "expo-app/LICENSE-EXPO",
+      "bytes": 1106,
+      "sha256": "fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4",
+      "executable": false
+    },
+    {
+      "path": "expo-app/README.md",
+      "bytes": 4963,
+      "sha256": "a00a294b382dbbe01b7af30b60e35514f23d90da25b98ae785ded321a5645efe",
+      "executable": false
+    },
+    {
+      "path": "expo-app/app.json",
+      "bytes": 362,
+      "sha256": "cff5b4f721422f82f42918b72ba4ef2a617bbb184dd7e67fabe6af5c23dc1d4e",
+      "executable": false
+    },
+    {
+      "path": "expo-app/core-source/after/AndroidExpoViewComponentDescriptor.cpp",
+      "bytes": 3096,
+      "sha256": "3d2318e54fed46134af698de045259a8a5b447c0bd909469453ffea9469a11f4",
+      "executable": false
+    },
+    {
+      "path": "expo-app/core-source/after/AndroidExpoViewComponentDescriptor.h",
+      "bytes": 1076,
+      "sha256": "f41f0f33bd42e50229764d0244e143353814c226b3a55f197e284757d1ad97d1",
+      "executable": false
+    },
+    {
+      "path": "expo-app/core-source/after/ExpoComponentDescriptorFactory.cpp",
+      "bytes": 900,
+      "sha256": "f4ea71fbbdb3aa232522fbcb16600fed17a9c7f1673cf4fc7b75920b510a7807",
+      "executable": false
+    },
+    {
+      "path": "expo-app/core-source/after/ExpoComponentDescriptorFactory.h",
+      "bytes": 445,
+      "sha256": "a5139afba7beb6c53938be51fb22a5360048b5e7781f3aa90cce1f0091493e6e",
+      "executable": false
+    },
+    {
+      "path": "expo-app/core-source/after/ExpoViewComponentRegistry.h",
+      "bytes": 2243,
+      "sha256": "f217cf7bdcc5e5f4fd20d00d15b4cc517ab1c14c61332f759025ee86823cd67a",
+      "executable": false
+    },
+    {
+      "path": "expo-app/core-source/after/FabricComponentsRegistry.cpp",
+      "bytes": 2762,
+      "sha256": "974fccfc57121c0f15998c88643cf8ef892a6a8523a5ff33c511026672a9b663",
+      "executable": false
+    },
+    {
+      "path": "expo-app/core-source/before/AndroidExpoViewComponentDescriptor.cpp",
+      "bytes": 2779,
+      "sha256": "43af18848f364124ebd96f7949ae45e2999b54b2ca638af115fca1a40891caf0",
+      "executable": false
+    },
+    {
+      "path": "expo-app/core-source/before/AndroidExpoViewComponentDescriptor.h",
+      "bytes": 1266,
+      "sha256": "8de70321e20a5de43c25eec73c7fd1b5b0c8a8e8fece8476ce6a879e6ca591b0",
+      "executable": false
+    },
+    {
+      "path": "expo-app/core-source/before/ExpoComponentDescriptorFactory.cpp",
+      "bytes": 905,
+      "sha256": "603c6c6bcee00059ad9247be97ff3a773abe9d1bce96828a63773736dcda721f",
+      "executable": false
+    },
+    {
+      "path": "expo-app/core-source/before/ExpoComponentDescriptorFactory.h",
+      "bytes": 842,
+      "sha256": "bb21e37b51db58c34bcd7d02a01d7bff804d597125df56634e034d613de0d473",
+      "executable": false
+    },
+    {
+      "path": "expo-app/core-source/before/FabricComponentsRegistry.cpp",
+      "bytes": 2827,
+      "sha256": "9062a054230973e85dca1a35491309b635c11de88b7003feef4144bc96e5b371",
+      "executable": false
+    },
+    {
+      "path": "expo-app/core-source/manifest.json",
+      "bytes": 1421,
+      "sha256": "ed82bb4f505959afd1460e95a75712d57da6834949f1f7956abbff4884d0f690",
+      "executable": false
+    },
+    {
+      "path": "expo-app/index.js",
+      "bytes": 99,
+      "sha256": "af10e01cf5fa6d399a83829926cc80d935c1dca8fb01313ab7cb54aab84c028b",
+      "executable": false
+    },
+    {
+      "path": "expo-app/package-lock.json",
+      "bytes": 229013,
+      "sha256": "005fbf98238390cb17cdfcdee3e72c90ae57a511553aa2e60291449a660352ee",
+      "executable": false
+    },
+    {
+      "path": "expo-app/package.json",
+      "bytes": 630,
+      "sha256": "4d744662d192a58c4ddedcf2f03ccd5ab0bd75ea92657222a75c5a1073127950",
+      "executable": false
+    },
+    {
+      "path": "expo-app/prebuild-template.json",
+      "bytes": 466,
+      "sha256": "8a111df5208429c27fed7e81c77c2f458a9d553cfc7de611839c1ab74764af10",
+      "executable": false
+    },
+    {
+      "path": "expo-app/select-core-source.py",
+      "bytes": 1561,
+      "sha256": "872660c8d632eefb410fdd93638e574b3f70e5dce4eff6b4417e2ff57fce0683",
+      "executable": false
+    },
+    {
+      "path": "expo-app/select-source.py",
+      "bytes": 981,
+      "sha256": "5b6ae4ae1e2c2ee79ecb4c01bfcfb0c7badddfd4cd6314712f0dc8cb1ca81cc7",
+      "executable": false
+    },
+    {
+      "path": "expo-app/sources/after/SplashScreenManager.kt",
+      "bytes": 3748,
+      "sha256": "e95953e3a6dba275eb167519796df78bde99e7d19d55e9ef91c95dad1b44e9c7",
+      "executable": false
+    },
+    {
+      "path": "expo-app/sources/before/SplashScreenManager.kt",
+      "bytes": 2791,
+      "sha256": "aea45b799b67f02af0aa917873dc0e5d647d3bae793eae9be21841a417edbaec",
+      "executable": false
+    },
+    {
+      "path": "expo-app/validation.json",
+      "bytes": 4778,
+      "sha256": "8e23386462e94f5fe817f9b2d466ac1591cf903e3b58364602862737c880ffce",
+      "executable": false
+    },
+    {
+      "path": "expo-app/withActivityLifecycleProbe.js",
+      "bytes": 983,
+      "sha256": "de8673febc541f352766c4346a9207815efed11332057fe4ab130a222ab501ed",
+      "executable": false
+    },
+    {
+      "path": "fabric/.gitignore",
+      "bytes": 7,
+      "sha256": "181314065df2f2fdaf920b1a8b5311daa216a2d6489a06ada5b49cc514d89417",
+      "executable": false
+    },
+    {
+      "path": "fabric/LICENSE-EXPO",
+      "bytes": 1106,
+      "sha256": "fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4",
+      "executable": false
+    },
+    {
+      "path": "fabric/LICENSE-REACT-NATIVE",
+      "bytes": 1088,
+      "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93",
+      "executable": false
+    },
+    {
+      "path": "fabric/README.md",
+      "bytes": 4232,
+      "sha256": "8e78ba4298a1bf9bf86d73f93f88dd921950e2e8f3ab8e68adbc41bdd207c334",
+      "executable": false
+    },
+    {
+      "path": "fabric/expected-results.json",
+      "bytes": 1147,
+      "sha256": "d71516f4857dff6669441ac58f87f0e3687a5be4991f24d94a70c7e447559c4c",
+      "executable": false
+    },
+    {
+      "path": "fabric/expo-modules-core-main.patch",
+      "bytes": 11863,
+      "sha256": "016c94ac63960b4ac8b138501631e2e5a698b4cd06773189166d49a1598b0534",
+      "executable": false
+    },
+    {
+      "path": "fabric/harness.hpp",
+      "bytes": 4124,
+      "sha256": "21d8cc34c9d4523c4c992950741589b4002feb5cc884caadb525c63cfbde93a3",
+      "executable": false
+    },
+    {
+      "path": "fabric/main.cpp",
+      "bytes": 3383,
+      "sha256": "d4085fbcf0f8c76123ca73f436505bea2ad475e6fc8d6c006ce8f7608c425f12",
+      "executable": false
+    },
+    {
+      "path": "fabric/registry-test.cpp",
+      "bytes": 5202,
+      "sha256": "a65b9f1706e739ff4769c21a38020c8b85ea9e1d986f35b602eead0979d7f4b6",
+      "executable": false
+    },
+    {
+      "path": "fabric/releases.json",
+      "bytes": 3935,
+      "sha256": "6af2341d41226e5e882633dab90dcbc327eeabe9c98e09d628c0046649a6c747",
+      "executable": false
+    },
+    {
+      "path": "fabric/run.py",
+      "bytes": 4808,
+      "sha256": "b74cb739eedf208294a8bdabc86ce621d333abc6fde775b42e449ef9a40b7300",
+      "executable": false
+    },
+    {
+      "path": "fabric/sources/expo-57.0.18/AndroidExpoViewComponentDescriptor.cpp",
+      "bytes": 3158,
+      "sha256": "7f0286acdab137943bf2de8fc4527248ed4621e5bb95165c26bb3e821cd8a15f",
+      "executable": false
+    },
+    {
+      "path": "fabric/sources/expo-57.0.18/AndroidExpoViewComponentDescriptor.h",
+      "bytes": 1266,
+      "sha256": "8de70321e20a5de43c25eec73c7fd1b5b0c8a8e8fece8476ce6a879e6ca591b0",
+      "executable": false
+    },
+    {
+      "path": "fabric/sources/expo-57.0.18/ExpoComponentDescriptorFactory.cpp",
+      "bytes": 824,
+      "sha256": "209b42b9a9cb72f3dbc5106c7e024af981eacebd2438b1659a988330acf0632b",
+      "executable": false
+    },
+    {
+      "path": "fabric/sources/expo-57.0.18/ExpoComponentDescriptorFactory.h",
+      "bytes": 582,
+      "sha256": "482500d4057c3ef8af76a887d74b0d1c83502a1a5321471779382904748b4364",
+      "executable": false
+    },
+    {
+      "path": "fabric/sources/expo-57.0.18/FabricComponentsRegistry.cpp",
+      "bytes": 2665,
+      "sha256": "d89d0e2da67e793e6875f09e2ff8f33681f9037c093dc8d45c2b4127315d06f6",
+      "executable": false
+    },
+    {
+      "path": "fabric/sources/expo-57.0.23/AndroidExpoViewComponentDescriptor.cpp",
+      "bytes": 3158,
+      "sha256": "7f0286acdab137943bf2de8fc4527248ed4621e5bb95165c26bb3e821cd8a15f",
+      "executable": false
+    },
+    {
+      "path": "fabric/sources/expo-57.0.23/AndroidExpoViewComponentDescriptor.h",
+      "bytes": 1266,
+      "sha256": "8de70321e20a5de43c25eec73c7fd1b5b0c8a8e8fece8476ce6a879e6ca591b0",
+      "executable": false
+    },
+    {
+      "path": "fabric/sources/expo-57.0.23/ExpoComponentDescriptorFactory.cpp",
+      "bytes": 824,
+      "sha256": "209b42b9a9cb72f3dbc5106c7e024af981eacebd2438b1659a988330acf0632b",
+      "executable": false
+    },
+    {
+      "path": "fabric/sources/expo-57.0.23/ExpoComponentDescriptorFactory.h",
+      "bytes": 582,
+      "sha256": "482500d4057c3ef8af76a887d74b0d1c83502a1a5321471779382904748b4364",
+      "executable": false
+    },
+    {
+      "path": "fabric/sources/expo-57.0.23/FabricComponentsRegistry.cpp",
+      "bytes": 2665,
+      "sha256": "d89d0e2da67e793e6875f09e2ff8f33681f9037c093dc8d45c2b4127315d06f6",
+      "executable": false
+    },
+    {
+      "path": "fabric/sources/expo-58.0.19/AndroidExpoViewComponentDescriptor.cpp",
+      "bytes": 2779,
+      "sha256": "43af18848f364124ebd96f7949ae45e2999b54b2ca638af115fca1a40891caf0",
+      "executable": false
+    },
+    {
+      "path": "fabric/sources/expo-58.0.19/AndroidExpoViewComponentDescriptor.h",
+      "bytes": 1266,
+      "sha256": "8de70321e20a5de43c25eec73c7fd1b5b0c8a8e8fece8476ce6a879e6ca591b0",
+      "executable": false
+    },
+    {
+      "path": "fabric/sources/expo-58.0.19/ExpoComponentDescriptorFactory.cpp",
+      "bytes": 905,
+      "sha256": "603c6c6bcee00059ad9247be97ff3a773abe9d1bce96828a63773736dcda721f",
+      "executable": false
+    },
+    {
+      "path": "fabric/sources/expo-58.0.19/ExpoComponentDescriptorFactory.h",
+      "bytes": 842,
+      "sha256": "bb21e37b51db58c34bcd7d02a01d7bff804d597125df56634e034d613de0d473",
+      "executable": false
+    },
+    {
+      "path": "fabric/sources/expo-58.0.19/FabricComponentsRegistry.cpp",
+      "bytes": 2827,
+      "sha256": "9062a054230973e85dca1a35491309b635c11de88b7003feef4144bc96e5b371",
+      "executable": false
+    },
+    {
+      "path": "fabric/sources/expo-main/AndroidExpoViewComponentDescriptor.cpp",
+      "bytes": 2779,
+      "sha256": "43af18848f364124ebd96f7949ae45e2999b54b2ca638af115fca1a40891caf0",
+      "executable": false
+    },
+    {
+      "path": "fabric/sources/expo-main/AndroidExpoViewComponentDescriptor.h",
+      "bytes": 1266,
+      "sha256": "8de70321e20a5de43c25eec73c7fd1b5b0c8a8e8fece8476ce6a879e6ca591b0",
+      "executable": false
+    },
+    {
+      "path": "fabric/sources/expo-main/ExpoComponentDescriptorFactory.cpp",
+      "bytes": 905,
+      "sha256": "603c6c6bcee00059ad9247be97ff3a773abe9d1bce96828a63773736dcda721f",
+      "executable": false
+    },
+    {
+      "path": "fabric/sources/expo-main/ExpoComponentDescriptorFactory.h",
+      "bytes": 842,
+      "sha256": "bb21e37b51db58c34bcd7d02a01d7bff804d597125df56634e034d613de0d473",
+      "executable": false
+    },
+    {
+      "path": "fabric/sources/expo-main/FabricComponentsRegistry.cpp",
+      "bytes": 2827,
+      "sha256": "9062a054230973e85dca1a35491309b635c11de88b7003feef4144bc96e5b371",
+      "executable": false
+    },
+    {
+      "path": "fabric/sources/fixed/AndroidExpoViewComponentDescriptor.cpp",
+      "bytes": 3096,
+      "sha256": "3d2318e54fed46134af698de045259a8a5b447c0bd909469453ffea9469a11f4",
+      "executable": false
+    },
+    {
+      "path": "fabric/sources/fixed/AndroidExpoViewComponentDescriptor.h",
+      "bytes": 1076,
+      "sha256": "f41f0f33bd42e50229764d0244e143353814c226b3a55f197e284757d1ad97d1",
+      "executable": false
+    },
+    {
+      "path": "fabric/sources/fixed/ExpoComponentDescriptorFactory.cpp",
+      "bytes": 900,
+      "sha256": "f4ea71fbbdb3aa232522fbcb16600fed17a9c7f1673cf4fc7b75920b510a7807",
+      "executable": false
+    },
+    {
+      "path": "fabric/sources/fixed/ExpoComponentDescriptorFactory.h",
+      "bytes": 445,
+      "sha256": "a5139afba7beb6c53938be51fb22a5360048b5e7781f3aa90cce1f0091493e6e",
+      "executable": false
+    },
+    {
+      "path": "fabric/sources/fixed/ExpoViewComponentRegistry.h",
+      "bytes": 2243,
+      "sha256": "f217cf7bdcc5e5f4fd20d00d15b4cc517ab1c14c61332f759025ee86823cd67a",
+      "executable": false
+    },
+    {
+      "path": "fabric/sources/fixed/FabricComponentsRegistry.cpp",
+      "bytes": 2762,
+      "sha256": "974fccfc57121c0f15998c88643cf8ef892a6a8523a5ff33c511026672a9b663",
+      "executable": false
+    },
+    {
+      "path": "fabric/sources/react-native/ComponentDescriptorProvider.h",
+      "bytes": 2484,
+      "sha256": "d4a6aa99b60a0c2082366876578cd0f799ba2625aac47c202ae579eccd10fdd9",
+      "executable": false
+    },
+    {
+      "path": "fabric/sources/react-native/ComponentDescriptorProviderRegistry.cpp",
+      "bytes": 2452,
+      "sha256": "f79907f62f2dee39fd06612c3fdb6e003344afae558c124f9b07efc7218ebdfe",
+      "executable": false
+    },
+    {
+      "path": "fabric/sources/react-native/ComponentDescriptorProviderRegistry.h",
+      "bytes": 2416,
+      "sha256": "da53febb700beae2ee75f2676564286d71bc38eb79790a10cb24719c7f2e3bdc",
+      "executable": false
+    },
+    {
+      "path": "fabric/sources/react-native/ComponentDescriptorRegistry.cpp",
+      "bytes": 6082,
+      "sha256": "2f82c858fd52e637721040399da651b0ce770921fdad852f7bc8d0966ef835da",
+      "executable": false
+    },
+    {
+      "path": "fabric/sources.json",
+      "bytes": 9166,
+      "sha256": "a60ae5a0128a8eca4bd7600551a85f5c174eea4e02701eba2c6dea866d42fca9",
+      "executable": false
+    },
+    {
+      "path": "monorepo-checks/README.md",
+      "bytes": 6783,
+      "sha256": "a2bf0e7fae1b3a1114c388606b042d44f9c2473645f36f2cecb352bc5a48045e",
+      "executable": false
+    },
+    {
+      "path": "monorepo-checks/core.patch",
+      "bytes": 11863,
+      "sha256": "016c94ac63960b4ac8b138501631e2e5a698b4cd06773189166d49a1598b0534",
+      "executable": false
+    },
+    {
+      "path": "monorepo-checks/package-results.json",
+      "bytes": 2177,
+      "sha256": "a136334203c7616c0e455751f6df95a3bdfcb034693c3d6b3ee69d53d4516bd7",
+      "executable": false
+    },
+    {
+      "path": "monorepo-checks/runtime-fixture-in-place.patch",
+      "bytes": 11965,
+      "sha256": "d1da1ce6c82a9aedeb20827011718ccf65f8bd0ac2003eb9c020dfd481297efe",
+      "executable": false
+    },
+    {
+      "path": "monorepo-checks/runtime-fixture-remount.patch",
+      "bytes": 12077,
+      "sha256": "100755e2177079127667d9acac075dfafffaf867c7f87f1ec4d578acaf4fe8d8",
+      "executable": false
+    },
+    {
+      "path": "monorepo-checks/runtime-results.json",
+      "bytes": 12305,
+      "sha256": "5627acb4bedf5a969bbc3236d61f9da2788b19b168b9f55785f8c09d9371f0a5",
+      "executable": false
+    },
+    {
+      "path": "monorepo-checks/splash.patch",
+      "bytes": 3388,
+      "sha256": "aece76724b36e345bebc2ceb009922cd216a2e5db2d33d0e5c0e6ba43a9a0bc3",
+      "executable": false
+    },
+    {
+      "path": "splash/.gitignore",
+      "bytes": 38,
+      "sha256": "10681babfb7b9f021255be6b1c36ad2cad85ceed8937ae2b2e792e810ab6acd3",
+      "executable": false
+    },
+    {
+      "path": "splash/LICENSE-EXPO",
+      "bytes": 1106,
+      "sha256": "fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4",
+      "executable": false
+    },
+    {
+      "path": "splash/LICENSE-GRADLE",
+      "bytes": 23645,
+      "sha256": "cf234c4188d773406f640bf89be680d9288f40ff96901c70d643fcea96ad46df",
+      "executable": false
+    },
+    {
+      "path": "splash/README.md",
+      "bytes": 4429,
+      "sha256": "d36a53333d6be01fcfd1280234d900b645cb47d35d1abd54861faf06b779bfee",
+      "executable": false
+    },
+    {
+      "path": "splash/RESULTS.md",
+      "bytes": 1514,
+      "sha256": "2f75deb4e3c8822fcbd51db252524b98c7feeee619c4528298758e6ea3f49056",
+      "executable": false
+    },
+    {
+      "path": "splash/app/build.gradle.kts",
+      "bytes": 379,
+      "sha256": "f74df15ecc0064f5710039745153897b5bbef1de5fc2fc525a51f49ac9a38362",
+      "executable": false
+    },
+    {
+      "path": "splash/app/src/main/AndroidManifest.xml",
+      "bytes": 723,
+      "sha256": "8dc4f2735544ee590149efbb6517b7a154e096a6cd74dfc19819c445acd9ad72",
+      "executable": false
+    },
+    {
+      "path": "splash/app/src/main/java/com/facebook/react/bridge/ReactMarker.kt",
+      "bytes": 529,
+      "sha256": "1b5d1ed7bf23102ee027997af422117e6397116c60b45f7b701c9ec44683b744",
+      "executable": false
+    },
+    {
+      "path": "splash/app/src/main/java/expo/modules/splashscreen/SplashScreenManager.kt",
+      "bytes": 3748,
+      "sha256": "e95953e3a6dba275eb167519796df78bde99e7d19d55e9ef91c95dad1b44e9c7",
+      "executable": false
+    },
+    {
+      "path": "splash/app/src/main/java/expo/modules/splashscreen/SplashScreenOptions.kt",
+      "bytes": 208,
+      "sha256": "3bab6a01f92d3ff55b9d7acda0e50a10833b6c843c5bf67fc2cb719ed61f9fd3",
+      "executable": false
+    },
+    {
+      "path": "splash/app/src/main/java/org/example/splashretention/LauncherActivity.kt",
+      "bytes": 473,
+      "sha256": "8de6c4daab842962a15e3836bd7beb519b75830c8693c641d955758920f0f802",
+      "executable": false
+    },
+    {
+      "path": "splash/app/src/main/java/org/example/splashretention/SplashActivity.kt",
+      "bytes": 642,
+      "sha256": "a1bad04c93bbe58f94967cbf27a34ffe88291802fe104fd237baab7155b91e38",
+      "executable": false
+    },
+    {
+      "path": "splash/app/src/main/java/org/example/splashretention/SplashRetentionInstrumentation.kt",
+      "bytes": 4348,
+      "sha256": "72ae8630a053710f97a611afe3ee75221f30a27905340b883d6ca6a8cac3ac6c",
+      "executable": false
+    },
+    {
+      "path": "splash/app/src/main/res/values/styles.xml",
+      "bytes": 451,
+      "sha256": "c403d584a67151494fda698c809535197005ee469ad31e1ff725a5ad912d1dfd",
+      "executable": false
+    },
+    {
+      "path": "splash/build.gradle.kts",
+      "bytes": 70,
+      "sha256": "6cabee94aac88993acad319e7195667e26033f4bd00d157e1aeac7c1ca9710ce",
+      "executable": false
+    },
+    {
+      "path": "splash/gradle/wrapper/gradle-wrapper.jar",
+      "bytes": 48966,
+      "sha256": "55243ef57851f12b070ad14f7f5bb8302daceeebc5bce5ece5fa6edb23e1145c",
+      "executable": false
+    },
+    {
+      "path": "splash/gradle/wrapper/gradle-wrapper.properties",
+      "bytes": 339,
+      "sha256": "519280ee807cb83ee0f7be30bb3aa51b71d0e14905cb3ecc285a4243b2ce4ac8",
+      "executable": false
+    },
+    {
+      "path": "splash/gradle.properties",
+      "bytes": 76,
+      "sha256": "4d4c82226865844bdc85391d907a383da4a35d3a3f5348985d5ec3997ab932fe",
+      "executable": false
+    },
+    {
+      "path": "splash/gradlew",
+      "bytes": 8676,
+      "sha256": "e712dc38715e260bf046106bf3b121b0021a4b2f83e3999913e435332a60e9f6",
+      "executable": true
+    },
+    {
+      "path": "splash/gradlew.bat",
+      "bytes": 2825,
+      "sha256": "9386e790d58b9368ca8e034536a5baa688643d51cb37bfa462503d36fd0291a6",
+      "executable": false
+    },
+    {
+      "path": "splash/license-provenance.json",
+      "bytes": 179,
+      "sha256": "7ed6c505325d42d5429cdb3bdf056f9e03c3715a160094799f6abf71e4f338eb",
+      "executable": false
+    },
+    {
+      "path": "splash/provenance.json",
+      "bytes": 424,
+      "sha256": "6c6622113e64d92d49b3eb59db1a79f2dac0e07e29bcdf35c4e6d6972c7d2a36",
+      "executable": false
+    },
+    {
+      "path": "splash/results.json",
+      "bytes": 1473,
+      "sha256": "2d3c593b4a36a73e9708a0d175e66534198a0747b07cdde08ff71d89de4f769f",
+      "executable": false
+    },
+    {
+      "path": "splash/select-source.py",
+      "bytes": 513,
+      "sha256": "fc36aec4a5a748545b557c3a43e981f6edcc48213fd124cffc94950b95e38d49",
+      "executable": false
+    },
+    {
+      "path": "splash/settings.gradle.kts",
+      "bytes": 282,
+      "sha256": "b7566962ed2fa21126caa54b496ba8401eb92d4ef0de4aead7ade824c6b5594e",
+      "executable": false
+    },
+    {
+      "path": "splash/sources/after/SplashScreenManager.kt",
+      "bytes": 3748,
+      "sha256": "e95953e3a6dba275eb167519796df78bde99e7d19d55e9ef91c95dad1b44e9c7",
+      "executable": false
+    },
+    {
+      "path": "splash/sources/before/SplashScreenManager.kt",
+      "bytes": 2791,
+      "sha256": "aea45b799b67f02af0aa917873dc0e5d647d3bae793eae9be21841a417edbaec",
+      "executable": false
+    },
+    {
+      "path": "splash/wrapper-provenance.json",
+      "bytes": 633,
+      "sha256": "c917d1141c7e78c0e06226ab044ca3e375302c4ff0979b3f3001285cb32a4470",
+      "executable": false
+    }
+  ],
+  "monorepoValidation": {
+    "expoBaseCommit": "aaf153746ff4eba1f8399eff9b08e804114bf1c2",
+    "reactNativeNpmVersion": "0.88.0",
+    "reactNativeSubmoduleCommit": "2cf221bc61c7d97aebb55344b7ab34975ae1a954",
+    "note": "The top-level reactNativeBaseCommit identifies host-repro source, not the bare-expo npm runtime.",
+    "packageReceipt": "monorepo-checks/package-results.json",
+    "runtimeReceipt": "monorepo-checks/runtime-results.json",
+    "statePropDeliveryPassed": false
+  },
+  "repository": "Elehiggle/expo-android-retention-repros"
+}

@@ -1,0 +1,316 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "sourceReceiptSha256": {
+    "runtimeManifest": "70678ac9d97f33cdfc45deb62e0abd195e1917a66f8797a78561fffe415e8171",
+    "runtimeReceipt": "ee47a21a189fae62fc99788e8dcb151ec775c00699f293fd493c47d9aaceda13",
+    "firstInPlaceObservations": "f3dd800af9d72e68f4f3f61e781b9d536d2ac31c611d2ed55dd10e6c21d73fa1",
+    "baselineInPlaceObservations": "87d7135a67c155dfbdbaebfec55efe58d1260036721e7c9944294df997c9085e"
+  },
+  "checkout": {
+    "repository": "expo/expo",
+    "baseCommit": "aaf153746ff4eba1f8399eff9b08e804114bf1c2",
+    "packageVersions": {
+      "expo": "58.0.11",
+      "expoModulesCore": "58.0.19",
+      "expoSplashScreen": "58.0.9",
+      "reactNative": "0.88.0"
+    }
+  },
+  "toolchain": {
+    "node": "v24.18.0",
+    "npm": "11.16.0",
+    "java": "17.0.20.1",
+    "androidNdk": "27.1.12297006 r27b",
+    "apiLevel": 37,
+    "architecture": "x86_64"
+  },
+  "productionPatches": {
+    "core": {
+      "file": "core.patch",
+      "sha256": "016c94ac63960b4ac8b138501631e2e5a698b4cd06773189166d49a1598b0534"
+    },
+    "splash": {
+      "file": "splash.patch",
+      "sha256": "aece76724b36e345bebc2ceb009922cd216a2e5db2d33d0e5c0e6ba43a9a0bc3"
+    },
+    "candidateCoreSourceSha256": {
+      "AndroidExpoViewComponentDescriptor.cpp": "3d2318e54fed46134af698de045259a8a5b447c0bd909469453ffea9469a11f4",
+      "AndroidExpoViewComponentDescriptor.h": "f41f0f33bd42e50229764d0244e143353814c226b3a55f197e284757d1ad97d1",
+      "ExpoComponentDescriptorFactory.cpp": "f4ea71fbbdb3aa232522fbcb16600fed17a9c7f1673cf4fc7b75920b510a7807",
+      "ExpoComponentDescriptorFactory.h": "a5139afba7beb6c53938be51fb22a5360048b5e7781f3aa90cce1f0091493e6e",
+      "FabricComponentsRegistry.cpp": "974fccfc57121c0f15998c88643cf8ef892a6a8523a5ff33c511026672a9b663",
+      "ExpoViewComponentRegistry.h": "f217cf7bdcc5e5f4fd20d00d15b4cc517ab1c14c61332f759025ee86823cd67a"
+    },
+    "baselineCoreSourceSha256": {
+      "AndroidExpoViewComponentDescriptor.cpp": "43af18848f364124ebd96f7949ae45e2999b54b2ca638af115fca1a40891caf0",
+      "AndroidExpoViewComponentDescriptor.h": "8de70321e20a5de43c25eec73c7fd1b5b0c8a8e8fece8476ce6a879e6ca591b0",
+      "ExpoComponentDescriptorFactory.cpp": "603c6c6bcee00059ad9247be97ff3a773abe9d1bce96828a63773736dcda721f",
+      "ExpoComponentDescriptorFactory.h": "bb21e37b51db58c34bcd7d02a01d7bff804d597125df56634e034d613de0d473",
+      "FabricComponentsRegistry.cpp": "9062a054230973e85dca1a35491309b635c11de88b7003feef4144bc96e5b371"
+    },
+    "splashScreenManagerSha256": "e95953e3a6dba275eb167519796df78bde99e7d19d55e9ef91c95dad1b44e9c7"
+  },
+  "fixtures": {
+    "remount": {
+      "file": "runtime-fixture-remount.patch",
+      "sha256": "100755e2177079127667d9acac075dfafffaf867c7f87f1ec4d578acaf4fe8d8",
+      "purpose": "Final eight-row comparison: a phase-based React key remounts the native view. Splash observation runs in onActivityPostDestroyed.",
+      "sources": [
+        {
+          "path": "apps/bare-expo/Playground.tsx",
+          "beforeSha256": "025d497dc07fa79d4bf46e04d799ce4461f4294216aceb54deb879bd51ee44a0",
+          "afterSha256": "6439eedbf53cfadfba8fcb3fb145b8b39e333947b75f0b3fc5ec4912581b745d"
+        },
+        {
+          "path": "apps/bare-expo/modules/benchmark-helper/android/src/main/java/expo/modules/benchmarkhelper/BenchmarkHelperModule.kt",
+          "beforeSha256": "4b7a773e8aa7992ca7b021430ec5b222e09eb8ccf890289ceb23928c2c748dd6",
+          "afterSha256": "0e168c14d04bbf934937f967d1017753e183060b3262aeb35042202b75a23751"
+        }
+      ]
+    },
+    "inPlace": {
+      "file": "runtime-fixture-in-place.patch",
+      "sha256": "d1da1ce6c82a9aedeb20827011718ccf65f8bd0ac2003eb9c020dfd481297efe",
+      "purpose": "Earlier failed live-update check: no phase-based React key, so the same native view receives prop updates. Its older Splash hook runs in onActivityDestroyed and is not evidence for the final post-destroy result.",
+      "sources": [
+        {
+          "path": "apps/bare-expo/Playground.tsx",
+          "beforeSha256": "025d497dc07fa79d4bf46e04d799ce4461f4294216aceb54deb879bd51ee44a0",
+          "afterSha256": "ee4a9c72c566adc3ccf5b6ba809a1ab806af26585107f395907afe98592cf76f"
+        },
+        {
+          "path": "apps/bare-expo/modules/benchmark-helper/android/src/main/java/expo/modules/benchmarkhelper/BenchmarkHelperModule.kt",
+          "beforeSha256": "4b7a773e8aa7992ca7b021430ec5b222e09eb8ccf890289ceb23928c2c748dd6",
+          "afterSha256": "3e2be548ff257788e02f7d65c43308fe190c4381f5850e4255d45a0d339b9b6a"
+        }
+      ]
+    },
+    "application": "Alternative patches against the same pinned originals; apply exactly one fixture, never both in sequence. Neither belongs in a production patch.",
+    "originalFixtureFilesRestored": true
+  },
+  "variants": {
+    "candidate": "Patched Core and patched Splash, final remount fixture.",
+    "baseline": "Original Core at the pinned commit, patched Splash, identical final remount fixture."
+  },
+  "builds": {
+    "workingDirectory": "apps/bare-expo/android",
+    "candidate": {
+      "command": "./gradlew :app:assembleDebug --no-daemon --console=plain -PreactNativeDevServerPort=8093 -PreactNativeArchitectures=x86_64 -Pexpo.core.buildFromSource=true",
+      "exitCode": 0,
+      "sourceTask": ":expo-modules-core:buildCMakeDebug[x86_64]"
+    },
+    "baseline": {
+      "command": "./gradlew :app:assembleDebug --no-daemon --console=plain -PreactNativeDevServerPort=8093 -PreactNativeArchitectures=x86_64 -Pexpo.core.buildFromSource=true",
+      "exitCode": 0,
+      "sourceTask": ":expo-modules-core:buildCMakeDebug[x86_64]"
+    },
+    "splashKotlinSourceBuild": {
+      "command": "./gradlew :app:assembleDebug --no-daemon --console=plain -PreactNativeDevServerPort=8093 -PreactNativeArchitectures=x86_64 -Pexpo.core.buildFromSource=true",
+      "exitCode": 0,
+      "sourceTask": ":expo-splash-screen:compileDebugKotlin",
+      "laterRemountBuildTaskState": "UP-TO-DATE"
+    }
+  },
+  "metro": {
+    "port": 8093,
+    "flags": {
+      "EXPO_NO_METRO_LAZY": "1",
+      "PROFILE": "1"
+    }
+  },
+  "statePropRemount": {
+    "overallResult": "FAIL: native state-prop delivery was not reliable in either variant.",
+    "valueSource": "Native TextView text; React expected text is not treated as delivered state.",
+    "nativeProp": "Prop(\"values\") with a List<Int> callback, marked .asStateProp().",
+    "unsetMeaning": "The native view has not received a list; [] is a valid delivered empty list.",
+    "expectedPhase1": [
+      3,
+      5,
+      8
+    ],
+    "expectedPhase2": [],
+    "candidate": [
+      {
+        "generation": 0,
+        "nonce": "mva9jupq-mlcqjt2irt",
+        "moduleInstance": 1,
+        "appContext": 15911315,
+        "reactContext": 137236813,
+        "phase1": "[3, 5, 8]",
+        "phase2": "unset"
+      },
+      {
+        "generation": 1,
+        "nonce": "mva9lxk2-flvaqnx4bz",
+        "moduleInstance": 2,
+        "appContext": 74522306,
+        "reactContext": 87348041,
+        "phase1": "unset",
+        "phase2": "[]"
+      },
+      {
+        "generation": 2,
+        "nonce": "mva9n55b-07jxewc422i",
+        "moduleInstance": 3,
+        "appContext": 194407987,
+        "reactContext": 25051082,
+        "phase1": "[3, 5, 8]",
+        "phase2": "[]"
+      },
+      {
+        "generation": 3,
+        "nonce": "mva9nz0k-uvfrfwqtnd",
+        "moduleInstance": 4,
+        "appContext": 16168555,
+        "reactContext": 145395315,
+        "phase1": "unset",
+        "phase2": "unset"
+      }
+    ],
+    "baseline": [
+      {
+        "generation": 0,
+        "nonce": "mva9s6gr-dhuv9jvm7h8",
+        "moduleInstance": 1,
+        "appContext": 123012557,
+        "reactContext": 1035519,
+        "phase1": "[3, 5, 8]",
+        "phase2": "[]"
+      },
+      {
+        "generation": 1,
+        "nonce": "mva9tpir-u4khqx8ownl",
+        "moduleInstance": 2,
+        "appContext": 42810369,
+        "reactContext": 62795539,
+        "phase1": "[3, 5, 8]",
+        "phase2": "unset"
+      },
+      {
+        "generation": 2,
+        "nonce": "mva9ummn-ivlzoqt97y",
+        "moduleInstance": 3,
+        "appContext": 167518389,
+        "reactContext": 208607527,
+        "phase1": "[3, 5, 8]",
+        "phase2": "[]"
+      },
+      {
+        "generation": 3,
+        "nonce": "mva9vk4l-6xr9nanljld",
+        "moduleInstance": 4,
+        "appContext": 179479402,
+        "reactContext": 14424204,
+        "phase1": "unset",
+        "phase2": "[]"
+      }
+    ],
+    "candidatePid": 23240,
+    "baselinePid": 27755,
+    "genuineJsReloadsPerVariant": 3,
+    "candidatePhase1Passes": "2/4",
+    "candidatePhase2Passes": "2/4",
+    "baselinePhase1Passes": "3/4",
+    "baselinePhase2Passes": "3/4",
+    "limitations": [
+      "Candidate delivered 2/4 per phase; baseline delivered 3/4 per phase. These rates are not equal.",
+      "Four runtime generations per variant do not establish equivalence or isolate a candidate-specific regression.",
+      "Keyed remounts are not proof of successful in-place prop updates."
+    ]
+  },
+  "statePropInPlace": {
+    "overallResult": "FAIL in both candidate and original-Core baseline.",
+    "initialNativeValues": [
+      1,
+      2
+    ],
+    "candidate": {
+      "result": "FAIL",
+      "observations": [
+        {
+          "phase": 1,
+          "expectedValues": [
+            3,
+            5,
+            8
+          ],
+          "actualValues": [
+            1,
+            2
+          ],
+          "nativeLabel": "phase-1"
+        },
+        {
+          "phase": 2,
+          "expectedValues": [],
+          "actualValues": [
+            1,
+            2
+          ],
+          "nativeLabel": "phase-2"
+        }
+      ]
+    },
+    "baseline": {
+      "result": "FAIL",
+      "observations": [
+        {
+          "phase": 2,
+          "expectedValues": [],
+          "actualValues": [
+            1,
+            2
+          ],
+          "nativeLabel": "phase-2"
+        }
+      ]
+    },
+    "scope": "These are earlier in-place observations, separate from the final remount matrix."
+  },
+  "ordinaryPropControl": {
+    "prop": "label",
+    "renderedBy": "The same native TextView that renders the list.",
+    "observed": "The ordinary label tracked phase changes while the state-prop list remained stale or unset.",
+    "scope": "Confirms ordinary-prop delivery in the observed sequences; does not make the state-prop check pass."
+  },
+  "reloads": {
+    "result": "PASS for runtime replacement only.",
+    "completedPerVariant": 3,
+    "sameProcessWithinEachVariant": true,
+    "nonceModuleAppContextAndReactContextChangedEachTime": true,
+    "notActivityRecreation": true
+  },
+  "splashLifecycle": {
+    "result": "PASS for one observed post-destroy owner-clearance check.",
+    "completedChecks": 1,
+    "callback": "onActivityPostDestroyed",
+    "setOptionsCallCount": 3,
+    "oldActivityId": 62685883,
+    "newActivityId": 92237759,
+    "destroyCount": 1,
+    "sameProcessPid": 23240,
+    "splashOwnerClearedOnDestroy": true,
+    "splashOwnerPresentAfterRecreate": true,
+    "fullAppGcOrRetainedBytesMeasured": false,
+    "scope": "Three setOptions calls, then one Activity recreation in the candidate. The old owner field was null after destroy callbacks and a new owner appeared after recreation. No full-app GC or retained-byte measurement."
+  },
+  "runtimeWarnings": {
+    "bothVariants": [
+      "React Native soft assertion: Expected to run on UI thread! during CoreModule.reloadAppAsync / NonFinalBridgelessDevSupportManager.handleReloadJS.",
+      "ReactHost teardown SoftException: reactInstance is null. Dropping work."
+    ],
+    "fatalProcessCrashObserved": false,
+    "scope": "Reloads still completed. These were not zero-warning runs."
+  },
+  "limits": [
+    "No green state-prop converter/update result.",
+    "No equivalence claim or candidate-specific attribution from the small A/B sample.",
+    "No full-app GC, retained-byte, or memory-plateau result.",
+    "Only Android API 37 x86_64 was exercised in this monorepo runtime check."
+  ],
+  "privacy": {
+    "included": "Public upstream patches, test-only fixtures, source hashes, synthetic probe identities and summarized results.",
+    "excluded": "Raw logs, screenshots, binaries, heaps, environment files, credentials and application/account data."
+  }
+}

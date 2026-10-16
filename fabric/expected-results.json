@@ -1,0 +1,32 @@
+[
+  {
+    "variant": "expo-57.0.18",
+    "exitCode": 0,
+    "stdout": "registrations=1000 providers=1000 live_descriptors=1000 late_descriptors=1000 first_descriptor_schema_generation=0\nPASS\n"
+  },
+  {
+    "variant": "expo-57.0.23",
+    "exitCode": 0,
+    "stdout": "registrations=1000 providers=1000 live_descriptors=1000 late_descriptors=1000 first_descriptor_schema_generation=0\nPASS\n"
+  },
+  {
+    "variant": "expo-58.0.19",
+    "exitCode": 0,
+    "stdout": "registrations=1000 providers=1000 live_descriptors=1000 late_descriptors=1000 first_descriptor_schema_generation=0\nPASS\n"
+  },
+  {
+    "variant": "expo-main",
+    "exitCode": 0,
+    "stdout": "registrations=1000 providers=1000 live_descriptors=1000 late_descriptors=1000 first_descriptor_schema_generation=0\nPASS\n"
+  },
+  {
+    "variant": "fixed",
+    "exitCode": 0,
+    "stdout": "registrations=1000 providers=1 live_descriptors=1 late_descriptors=1 first_descriptor_schema_generation=999\nPASS\n"
+  },
+  {
+    "variant": "registry-concurrency",
+    "exitCode": 0,
+    "stdout": "Expo registry identity, metadata replacement, release and concurrent snapshots passed\n"
+  }
+]

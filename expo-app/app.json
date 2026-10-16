@@ -1,0 +1,19 @@
+{
+  "expo": {
+    "name": "Splash Activity Repro",
+    "slug": "splash-activity-repro",
+    "version": "1.0.0",
+    "android": {
+      "package": "org.example.splashretentionexpo"
+    },
+    "plugins": [
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#ffffff"
+        }
+      ],
+      "./withActivityLifecycleProbe.js"
+    ]
+  }
+}

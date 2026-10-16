@@ -1,0 +1,62 @@
+{
+  "date": "2026-10-16",
+  "expoCommit": "aaf153746ff4eba1f8399eff9b08e804114bf1c2",
+  "reactNativeSubmoduleCommit": "2cf221bc61c7d97aebb55344b7ab34975ae1a954",
+  "node": "24.18.0",
+  "pnpm": "12.2.1",
+  "platform": "WSL2 Linux x86_64",
+  "patches": {
+    "expo-modules-core": "016c94ac63960b4ac8b138501631e2e5a698b4cd06773189166d49a1598b0534",
+    "expo-splash-screen": "aece76724b36e345bebc2ceb009922cd216a2e5db2d33d0e5c0e6ba43a9a0bc3"
+  },
+  "install": {
+    "command": "pnpm install --frozen-lockfile --reporter=append-only",
+    "exitCode": 0,
+    "lockfileChanged": false
+  },
+  "checks": [
+    {
+      "command": "node ./tools/bin/expotools.js check-packages expo-modules-core expo-splash-screen",
+      "exitCode": 0,
+      "tasksSuccessful": 16,
+      "tasksTotal": 16,
+      "cachedBuildTasks": 8,
+      "testsCached": false,
+      "remoteCachingEnabled": false,
+      "formatTasksSuccessful": 4
+    },
+    {
+      "command": "pnpm --filter expo-modules-core --filter expo-splash-screen run lint --fix",
+      "exitCode": 0,
+      "lintErrors": 0,
+      "lintWarnings": 0
+    },
+    {
+      "command": "pnpm --filter expo-modules-core --filter expo-splash-screen run format",
+      "exitCode": 0
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0
+    }
+  ],
+  "tests": {
+    "expo-modules-core": {
+      "suitesPassed": 43,
+      "testsPassed": 277,
+      "snapshotsPassed": 8
+    },
+    "expo-splash-screen": {
+      "suitesPassed": 8,
+      "testsPassed": 16
+    }
+  },
+  "notes": [
+    "The checker hides successful task output. Counts come from the individual Turbo task logs.",
+    "Eight local build cache hits came from dependency preparation. Both Jest test tasks executed.",
+    "Jest reports existing project-level maxWorkers/passWithNoTests configuration warnings. pnpm reports a selected-workspace dependency cycle. Neither changes results; the linters report zero warnings.",
+    "Lint and format did not change any candidate file or add unrelated changes.",
+    "No GitHub workflow or cloud build ran. Neither patch changes a config plugin.",
+    "These are package checks; native runtime verification is recorded separately."
+  ]
+}
